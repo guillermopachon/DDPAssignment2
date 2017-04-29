@@ -4,6 +4,7 @@ author: "Guillermo Pachón"
 date: "April 29, 2017"
 output:
   ioslides_presentation: default
+  slidy_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -20,8 +21,9 @@ library(ggplot2)
 ```{r}
 set.seed(100)
 d <- diamonds[sample(nrow(diamonds), 1000), ]
-plot_ly(d, x = ~carat, y = ~price, color = ~carat,
-        size = ~carat, text = ~paste("Clarity: ", clarity), type = "scatter", mode = "markers")
+names(d) <- c("Carat","Cut","Color","Clarity","Depth","Table","Price","x","y","z") 
+plot_ly(d, x = ~Carat, y = ~Price, color = ~Carat,
+        size = ~Carat, text = ~paste("Clarity: ", Clarity), type = "scatter", mode = "markers")
 ```
   
 ###### Graphics from: https://plot.ly/r/
@@ -29,47 +31,11 @@ plot_ly(d, x = ~carat, y = ~price, color = ~carat,
 ## Plotly Graphics
 
 ```{r}
-p <- ggplot(data = d, aes(x = carat, y = price)) +
-  geom_point(aes(text = paste("Clarity:", clarity))) +
-  geom_smooth(aes(colour = cut, fill = cut), method = "loess") + facet_wrap(~ cut)
+p <- ggplot(data = d, aes(x = Carat, y = Price)) +
+  geom_point(aes(text = paste("Clarity:", Clarity))) +
+  geom_smooth(aes(colour = Cut, fill = Cut), method = "loess") + facet_wrap(~ Cut)
 
 ggplotly(p)
-```
-  
-######Graphics from: https://plot.ly/r/
-
-## Plotly Graphics
-
-```{r}
-y1 <- c(0.75, 5.25, 5.5, 6, 6.2, 6.6, 6.80, 7.0, 7.2, 7.5, 7.5, 7.75, 8.15,
-       8.15, 8.65, 8.93, 9.2, 9.5, 10, 10.25, 11.5, 12, 16, 20.90, 22.3, 23.25)
-y2 <- c(0.75, 5.25, 5.5, 6, 6.2, 6.6, 6.80, 7.0, 7.2, 7.5, 7.5, 7.75, 8.15,
-        8.15, 8.65, 8.93, 9.2, 9.5, 10, 10.25, 11.5, 12, 16, 20.90, 22.3, 23.25)
-y3 <- c(0.75, 5.25, 5.5, 6, 6.2, 6.6, 6.80, 7.0, 7.2, 7.5, 7.5, 7.75, 8.15,
-        8.15, 8.65, 8.93, 9.2, 9.5, 10, 10.25, 11.5, 12, 16, 20.90, 22.3, 23.25)
-y4 <- c(0.75, 5.25, 5.5, 6, 6.2, 6.6, 6.80, 7.0, 7.2, 7.5, 7.5, 7.75, 8.15,
-        8.15, 8.65, 8.93, 9.2, 9.5, 10, 10.25, 11.5, 12, 16, 20.90, 22.3, 23.25)
-
-p <- plot_ly(type = 'box') %>%
-  add_boxplot(y = y1, jitter = 0.3, pointpos = -1.8, boxpoints = 'all',
-              marker = list(color = 'rgb(7,40,89)'),
-              line = list(color = 'rgb(7,40,89)'),
-              name = "All Points") %>%
-  add_boxplot(y = y2, name = "Only Whiskers", boxpoints = FALSE,
-              marker = list(color = 'rgb(9,56,125)'),
-              line = list(color = 'rgb(9,56,125)')) %>%
-  add_boxplot(y = y3, name = "Suspected Outlier", boxpoints = 'suspectedoutliers',
-              marker = list(color = 'rgb(8,81,156)',
-                            outliercolor = 'rgba(219, 64, 82, 0.6)',
-                            line = list(outliercolor = 'rgba(219, 64, 82, 1.0)',
-                                        outlierwidth = 2)),
-              line = list(color = 'rgb(8,81,156)')) %>%
-  add_boxplot(y = y4, name = "Whiskers and Outliers", boxpoints = 'outliers',
-              marker = list(color = 'rgb(107,174,214)'),
-              line = list(color = 'rgb(107,174,214)')) %>%
-  layout(title = "Box Plot Styling Outliers")
-
-p
 ```
   
 ######Graphics from: https://plot.ly/r/
