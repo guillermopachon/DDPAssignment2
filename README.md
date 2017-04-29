@@ -13,3 +13,9 @@
 ### Assignment
 
 View the result in: https://guillermopachon.github.io/DDPAssignment2/W3-Assignment.html
+
+### Firefox Issue
+
+There is a known problem rendering the page in Firefox: http://stackoverflow.com/questions/41601669/why-are-plotly-rendered-graphs-not-working-on-mozilla
+
+PLEASE USE IE or Chrome!!

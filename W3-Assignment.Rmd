@@ -13,32 +13,28 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, error = FALSE)
 
 ```{r, include=FALSE}
 library(plotly)
-library(ggplot2)
 ```
+  
 
 ## Plotly Graphics
 
 ```{r}
-set.seed(100)
-d <- diamonds[sample(nrow(diamonds), 1000), ]
-names(d) <- c("Carat","Cut","Color","Clarity","Depth","Table","Price","x","y","z") 
-plot_ly(d, x = ~Carat, y = ~Price, color = ~Carat,
-        size = ~Carat, text = ~paste("Clarity: ", Clarity), type = "scatter", mode = "markers")
+plot_ly(mtcars, x = ~wt, y = ~mpg, color = ~factor(cyl),
+        size = ~wt, text = ~paste("Displacement: ", disp),
+        type = "scatter", mode = "markers")
 ```
   
-###### Graphics from: https://plot.ly/r/
-
+  
 ## Plotly Graphics
 
 ```{r}
-p <- ggplot(data = d, aes(x = Carat, y = Price)) +
-  geom_point(aes(text = paste("Clarity:", Clarity))) +
-  geom_smooth(aes(colour = Cut, fill = Cut), method = "loess") + facet_wrap(~ Cut)
-
-ggplotly(p)
+fit <- lm(mpg ~ wt, data = mtcars)
+plot_ly(mtcars, x = ~wt, y = ~mpg, color = ~factor(cyl),
+        size = ~wt, text = ~paste("Displacement: ", disp),
+        type = "scatter", mode = "markers") %>%
+add_trace(x = ~wt, y = fitted(fit), mode="lines", line=list(width=1))
 ```
   
-######Graphics from: https://plot.ly/r/
 
 ## End
 
