@@ -12,4 +12,4 @@
 
 ### Assignment
 
-View the result in: https://guillermopachon.github.io/DDPAssignment2/W3-Assignment.html
+View the result in: (https://guillermopachon.github.io/DDPAssignment2/W3-Assignment.html)
